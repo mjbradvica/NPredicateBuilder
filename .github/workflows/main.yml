@@ -26,7 +26,7 @@ jobs:
         uses: Particular/install-sql-server-action@v1.2.0
         with:
           connection-string-env-var: TEST_CONNECTION_STRING
-          catalog: NPredicateBuilder.Tests
+          # catalog: NPredicateBuilder.Tests
           extra-params: "TrustServerCertificate=true;MultipleActiveResultSets=true;"
 
       - name: Restore
