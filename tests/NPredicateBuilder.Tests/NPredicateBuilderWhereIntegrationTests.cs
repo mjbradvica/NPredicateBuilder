@@ -17,24 +17,13 @@ namespace NPredicateBuilder.Tests
     public class NPredicateBuilderWhereIntegrationTests
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="NPredicateBuilderWhereIntegrationTests"/> class.
-        /// </summary>
-        public NPredicateBuilderWhereIntegrationTests()
-        {
-            using (var context = new TestContext())
-            {
-                var allCustomers = context.Customers;
-                context.Customers.RemoveRange(allCustomers);
-                context.SaveChanges();
-            }
-        }
-
-        /// <summary>
         /// Ensures where filters for databases are correct.
         /// </summary>
         [TestMethod]
         public void Where_DbSet_FiltersCorrectly()
         {
+            TestHelper.ClearCustomers();
+
             var customers = new List<Customer>
             {
                 TestHelper.Billy(),
@@ -66,6 +55,8 @@ namespace NPredicateBuilder.Tests
         [TestMethod]
         public void MultipleAndFilters_FiltersCorrectly()
         {
+            TestHelper.ClearCustomers();
+
             var correctCustomer = new Customer(Guid.NewGuid(), "Billy", 10);
 
             var customers = new List<Customer>
@@ -99,6 +90,8 @@ namespace NPredicateBuilder.Tests
         [TestMethod]
         public void CombinedAndOrFilters_FiltersCorrectly()
         {
+            TestHelper.ClearCustomers();
+
             var customers = new List<Customer>
             {
                 new Customer(Guid.NewGuid(), "Billy", 5),
@@ -132,6 +125,8 @@ namespace NPredicateBuilder.Tests
         [TestMethod]
         public void AppendedFilters_FiltersCorrectly()
         {
+            TestHelper.ClearCustomers();
+
             var customers = new List<Customer>
             {
                 new Customer(Guid.NewGuid(), "Billy", 5),

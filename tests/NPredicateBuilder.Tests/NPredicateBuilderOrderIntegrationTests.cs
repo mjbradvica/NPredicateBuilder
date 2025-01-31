@@ -17,24 +17,13 @@ namespace NPredicateBuilder.Tests
     public class NPredicateBuilderOrderIntegrationTests
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="NPredicateBuilderOrderIntegrationTests"/> class.
-        /// </summary>
-        public NPredicateBuilderOrderIntegrationTests()
-        {
-            using (var context = new TestContext())
-            {
-                var allCustomers = context.Customers;
-                context.Customers.RemoveRange(allCustomers);
-                context.SaveChanges();
-            }
-        }
-
-        /// <summary>
         /// Ensure orders for databases are correct.
         /// </summary>
         [TestMethod]
         public void OrderBy_OrdersCorrectly()
         {
+            TestHelper.ClearCustomers();
+
             var customers = new List<Customer>
             {
                 TestHelper.Bobby(),
@@ -64,6 +53,8 @@ namespace NPredicateBuilder.Tests
         [TestMethod]
         public void ThenBy_OrdersCorrectly()
         {
+            TestHelper.ClearCustomers();
+
             var customers = new List<Customer>
             {
                 new Customer(Guid.NewGuid(), "Bobby", 30),
@@ -96,6 +87,8 @@ namespace NPredicateBuilder.Tests
         [TestMethod]
         public void OrderByDescending_OrdersCorrectly()
         {
+            TestHelper.ClearCustomers();
+
             var customers = new List<Customer>
             {
                 TestHelper.Bobby(),
@@ -125,6 +118,8 @@ namespace NPredicateBuilder.Tests
         [TestMethod]
         public void ThenByDescending_OrdersCorrectly()
         {
+            TestHelper.ClearCustomers();
+
             var customers = new List<Customer>
             {
                 new Customer(Guid.NewGuid(), "Bobby", 30),

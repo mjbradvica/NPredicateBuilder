@@ -28,5 +28,17 @@ namespace NPredicateBuilder.Tests
         {
             return new Customer(Guid.NewGuid(), "Bobby", 30);
         }
+
+        /// <summary>
+        /// Clears the customer table.
+        /// </summary>
+        public static void ClearCustomers()
+        {
+            using (var context = new TestContext())
+            {
+                context.Customers.RemoveRange(context.Customers);
+                context.SaveChanges();
+            }
+        }
     }
 }
