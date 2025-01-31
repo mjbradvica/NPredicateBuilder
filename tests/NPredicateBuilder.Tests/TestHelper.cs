@@ -3,6 +3,7 @@
 // </copyright>
 
 using System;
+using System.Linq;
 
 namespace NPredicateBuilder.Tests
 {
@@ -36,8 +37,13 @@ namespace NPredicateBuilder.Tests
         {
             using (var context = new TestContext())
             {
-                context.Customers.RemoveRange(context.Customers);
-                context.SaveChanges();
+                var customers = context.Customers.ToList();
+
+                if (customers.Any())
+                {
+                    context.Customers.RemoveRange(customers);
+                    context.SaveChanges();
+                }
             }
         }
     }
