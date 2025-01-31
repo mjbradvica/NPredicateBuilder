@@ -35,6 +35,8 @@ namespace NPredicateBuilder.Tests
         /// Initializes a new instance of the <see cref="TestContext"/> class.
         /// </summary>
         public TestContext()
+            : base(new DbContextOptionsBuilder().UseSqlServer(Environment.GetEnvironmentVariable("TEST_CONNECTION_STRING") ??
+                                                              "Server=.\\SQLExpress;Database=NPredicateBuilder;Trusted_Connection=True;MultipleActiveResultSets=true;Integrated Security=True;TrustServerCertificate=true").Options)
         {
             Database.EnsureCreated();
         }
@@ -44,20 +46,5 @@ namespace NPredicateBuilder.Tests
         /// Gets or sets a DbSet for a Customer table.
         /// </summary>
         public DbSet<Customer> Customers { get; set; }
-
-#if NETFRAMEWORK
-#else
-        /// <summary>
-        /// Configures the database connection.
-        /// </summary>
-        /// <param name="optionsBuilder">Allow further options for database configuration.</param>
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            var connectionString = Environment.GetEnvironmentVariable("TEST_CONNECTION_STRING") ??
-                                   "Server=.\\SQLExpress;Database=NPredicateBuilder;Trusted_Connection=True;MultipleActiveResultSets=true;Integrated Security=True;TrustServerCertificate=true";
-
-            optionsBuilder.UseSqlServer(connectionString);
-        }
-#endif
     }
 }
