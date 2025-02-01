@@ -18,12 +18,14 @@ namespace NPredicateBuilder.Tests
         public TestContext()
         {
             Database.EnsureCreated();
+
+            Customers = Set<Customer>();
         }
 
         /// <summary>
-        /// Gets or sets a DbSet for a Customer table.
+        /// Gets a DbSet for a Customer table.
         /// </summary>
-        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Customer> Customers { get; }
 
         /// <summary>
         /// Configures the database connection.
