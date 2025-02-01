@@ -16,8 +16,6 @@ namespace NPredicateBuilder.Tests
         /// Initializes a new instance of the <see cref="TestContext"/> class.
         /// </summary>
         public TestContext()
-            : base(new DbContextOptionsBuilder().UseSqlServer(Environment.GetEnvironmentVariable("TEST_CONNECTION_STRING") ??
-                                                              "Server=.\\SQLExpress;Database=NPredicateBuilder;Trusted_Connection=True;MultipleActiveResultSets=true;Integrated Security=True;TrustServerCertificate=true").Options)
         {
             Database.EnsureCreated();
         }
