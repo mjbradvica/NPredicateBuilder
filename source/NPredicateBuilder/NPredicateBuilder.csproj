@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netstandard2.1;net5.0;net6.0;net7.0;net8.0;net9.0</TargetFrameworks>
+    <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
     <Authors>Michael Bradvica</Authors>
     <Description>NPredicateBuilder core library and extensions for LINQ to Objects.</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -17,12 +17,6 @@
     <PackageIcon>logo.png</PackageIcon>
     <PackageTags>linq, csharp,</PackageTags>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="Sets\**" />
-    <EmbeddedResource Remove="Sets\**" />
-    <None Remove="Sets\**" />
-  </ItemGroup>
 
   <ItemGroup>
     <None Include="..\..\images\logo.png">
