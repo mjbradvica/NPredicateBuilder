@@ -2,11 +2,13 @@
 // Copyright (c) Michael Bradvica LLC. All rights reserved.
 // </copyright>
 
+using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NPredicateBuilder.EF;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace NPredicateBuilder.Tests
 {
@@ -17,24 +19,14 @@ namespace NPredicateBuilder.Tests
     public class NPredicateBuilderOrderIntegrationTests
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="NPredicateBuilderOrderIntegrationTests"/> class.
-        /// </summary>
-        public NPredicateBuilderOrderIntegrationTests()
-        {
-            using (var context = new TestContext())
-            {
-                var allCustomers = context.Customers;
-                context.Customers.RemoveRange(allCustomers);
-                context.SaveChanges();
-            }
-        }
-
-        /// <summary>
         /// Ensure orders for databases are correct.
         /// </summary>
+        /// <returns>A <see cref="Task"/> representing the asynchronous unit test.</returns>
         [TestMethod]
-        public void OrderBy_OrdersCorrectly()
+        public async Task OrderBy_OrdersCorrectlyAsync()
         {
+            await TestHelper.ClearTables();
+
             var customers = new List<Customer>
             {
                 TestHelper.Bobby(),
@@ -42,17 +34,19 @@ namespace NPredicateBuilder.Tests
                 TestHelper.Bobby(),
             };
 
-            using (var context = new TestContext())
+            await using (var context = new TestContext())
             {
-                context.Customers.AddRange(customers);
-                context.SaveChanges();
+                await context.Customers.AddRangeAsync(customers);
+                await context.SaveChangesAsync();
             }
 
-            using (var context = new TestContext())
+            await using (var context = new TestContext())
             {
                 var order = new CustomerTestOrder().ByName();
 
-                var result = context.Customers.NPredicateBuilderEFOrder(order).ToList();
+                var result = await context.Customers
+                    .NPredicateBuilderEFOrder(order)
+                    .ToListAsync();
 
                 Assert.AreEqual("Billy", result.First().Name);
             }
@@ -61,9 +55,12 @@ namespace NPredicateBuilder.Tests
         /// <summary>
         /// Ensures multiple orders for databases are correct.
         /// </summary>
+        /// <returns>A <see cref="Task"/> representing the asynchronous unit test.</returns>
         [TestMethod]
-        public void ThenBy_OrdersCorrectly()
+        public async Task ThenBy_OrdersCorrectlyAsync()
         {
+            await TestHelper.ClearTables();
+
             var customers = new List<Customer>
             {
                 new Customer(Guid.NewGuid(), "Bobby", 30),
@@ -71,19 +68,21 @@ namespace NPredicateBuilder.Tests
                 new Customer(Guid.NewGuid(), "Billy", 20),
             };
 
-            using (var context = new TestContext())
+            await using (var context = new TestContext())
             {
-                context.Customers.AddRange(customers);
-                context.SaveChanges();
+                await context.Customers.AddRangeAsync(customers);
+                await context.SaveChangesAsync();
             }
 
-            using (var context = new TestContext())
+            await using (var context = new TestContext())
             {
                 var order = new CustomerTestOrder()
                     .ByName()
                     .ThenByAge();
 
-                var result = context.Customers.NPredicateBuilderEFOrder(order).ToList();
+                var result = await context.Customers
+                    .NPredicateBuilderEFOrder(order)
+                    .ToListAsync();
 
                 Assert.AreEqual("Billy", result.First().Name);
                 Assert.AreEqual(20, result.First().Age);
@@ -93,9 +92,12 @@ namespace NPredicateBuilder.Tests
         /// <summary>
         /// Ensures multiple orders for databases are correct.
         /// </summary>
+        /// <returns>A <see cref="Task"/> representing the asynchronous unit test.</returns>
         [TestMethod]
-        public void OrderByDescending_OrdersCorrectly()
+        public async Task OrderByDescending_OrdersCorrectlyAsync()
         {
+            await TestHelper.ClearTables();
+
             var customers = new List<Customer>
             {
                 TestHelper.Bobby(),
@@ -103,17 +105,20 @@ namespace NPredicateBuilder.Tests
                 TestHelper.Bobby(),
             };
 
-            using (var context = new TestContext())
+            await using (var context = new TestContext())
             {
-                context.Customers.AddRange(customers);
-                context.SaveChanges();
+                await context.Customers.AddRangeAsync(customers);
+                await context.SaveChangesAsync();
             }
 
-            using (var context = new TestContext())
+            await using (var context = new TestContext())
             {
-                var order = new CustomerTestOrder().ByNameDescending();
+                var order = new CustomerTestOrder()
+                    .ByNameDescending();
 
-                var result = context.Customers.NPredicateBuilderEFOrder(order).ToList();
+                var result = await context.Customers
+                    .NPredicateBuilderEFOrder(order)
+                    .ToListAsync();
 
                 Assert.AreEqual("Billy", result.Last().Name);
             }
@@ -122,9 +127,12 @@ namespace NPredicateBuilder.Tests
         /// <summary>
         /// Ensures multiple orders for databases are correct.
         /// </summary>
+        /// <returns>A <see cref="Task"/> representing the asynchronous unit test.</returns>
         [TestMethod]
-        public void ThenByDescending_OrdersCorrectly()
+        public async Task ThenByDescending_OrdersCorrectly()
         {
+            await TestHelper.ClearTables();
+
             var customers = new List<Customer>
             {
                 new Customer(Guid.NewGuid(), "Bobby", 30),
@@ -132,19 +140,21 @@ namespace NPredicateBuilder.Tests
                 new Customer(Guid.NewGuid(), "Billy", 20),
             };
 
-            using (var context = new TestContext())
+            await using (var context = new TestContext())
             {
-                context.Customers.AddRange(customers);
-                context.SaveChanges();
+                await context.Customers.AddRangeAsync(customers);
+                await context.SaveChangesAsync();
             }
 
-            using (var context = new TestContext())
+            await using (var context = new TestContext())
             {
                 var order = new CustomerTestOrder()
                     .ByName()
                     .ThenByAgeDescending();
 
-                var result = context.Customers.NPredicateBuilderEFOrder(order).ToList();
+                var result = await context.Customers
+                    .NPredicateBuilderEFOrder(order)
+                    .ToListAsync();
 
                 Assert.AreEqual("Billy", result.First().Name);
                 Assert.AreEqual(30, result.First().Age);

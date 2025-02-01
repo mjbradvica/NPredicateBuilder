@@ -2,11 +2,13 @@
 // Copyright (c) Michael Bradvica LLC. All rights reserved.
 // </copyright>
 
+using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NPredicateBuilder.EF;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace NPredicateBuilder.Tests
 {
@@ -17,44 +19,34 @@ namespace NPredicateBuilder.Tests
     public class NPredicateBuilderWhereIntegrationTests
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="NPredicateBuilderWhereIntegrationTests"/> class.
-        /// </summary>
-        public NPredicateBuilderWhereIntegrationTests()
-        {
-            using (var context = new TestContext())
-            {
-                var allCustomers = context.Customers;
-                context.Customers.RemoveRange(allCustomers);
-                context.SaveChanges();
-            }
-        }
-
-        /// <summary>
         /// Ensures where filters for databases are correct.
         /// </summary>
+        /// <returns>A <see cref="Task"/> representing the asynchronous unit test.</returns>
         [TestMethod]
-        public void Where_DbSet_FiltersCorrectly()
+        public async Task Where_DbSet_FiltersCorrectly()
         {
+            await TestHelper.ClearTables();
+
             var customers = new List<Customer>
             {
                 TestHelper.Billy(),
                 TestHelper.Bobby(),
             };
 
-            using (var context = new TestContext())
+            await using (var context = new TestContext())
             {
-                context.Customers.AddRange(customers);
-                context.SaveChanges();
+                await context.Customers.AddRangeAsync(customers);
+                await context.SaveChangesAsync();
             }
 
-            using (var context = new TestContext())
+            await using (var context = new TestContext())
             {
                 var query = new CustomerTestQuery()
                     .AndNameIsBobby();
 
-                var result = context.Customers
+                var result = await context.Customers
                     .NPredicateBuilderEFWhere(query)
-                    .ToList();
+                    .ToListAsync();
 
                 Assert.AreEqual("Bobby", result.Single().Name);
             }
@@ -63,9 +55,12 @@ namespace NPredicateBuilder.Tests
         /// <summary>
         /// Ensures multiple filters for databases are correct.
         /// </summary>
+        /// <returns>A <see cref="Task"/> representing the asynchronous unit test.</returns>
         [TestMethod]
-        public void MultipleAndFilters_FiltersCorrectly()
+        public async Task MultipleAndFilters_FiltersCorrectly()
         {
+            await TestHelper.ClearTables();
+
             var correctCustomer = new Customer(Guid.NewGuid(), "Billy", 10);
 
             var customers = new List<Customer>
@@ -73,20 +68,20 @@ namespace NPredicateBuilder.Tests
                 correctCustomer, new Customer(Guid.NewGuid(), "Billy", 5), TestHelper.Bobby(),
             };
 
-            using (var context = new TestContext())
+            await using (var context = new TestContext())
             {
-                context.Customers.AddRange(customers);
-                context.SaveChanges();
+                await context.Customers.AddRangeAsync(customers);
+                await context.SaveChangesAsync();
             }
 
-            using (var context = new TestContext())
+            await using (var context = new TestContext())
             {
                 var query = new CustomerTestQuery()
                     .AndNameIsBilly().AndAgeIsOverSix();
 
-                var result = context.Customers
+                var result = await context.Customers
                     .NPredicateBuilderEFWhere(query)
-                    .ToList();
+                    .ToListAsync();
 
                 Assert.AreEqual(correctCustomer.Name, result.Single().Name);
                 Assert.AreEqual(correctCustomer.Age, result.Single().Age);
@@ -96,9 +91,12 @@ namespace NPredicateBuilder.Tests
         /// <summary>
         /// Ensures compound filters for databases are correct.
         /// </summary>
+        /// <returns>A <see cref="Task"/> representing the asynchronous unit test.</returns>
         [TestMethod]
-        public void CombinedAndOrFilters_FiltersCorrectly()
+        public async Task CombinedAndOrFilters_FiltersCorrectly()
         {
+            await TestHelper.ClearTables();
+
             var customers = new List<Customer>
             {
                 new Customer(Guid.NewGuid(), "Billy", 5),
@@ -107,20 +105,20 @@ namespace NPredicateBuilder.Tests
                 new Customer(Guid.NewGuid(), "Bobby", 25),
             };
 
-            using (var context = new TestContext())
+            await using (var context = new TestContext())
             {
-                context.Customers.AddRange(customers);
-                context.SaveChanges();
+                await context.Customers.AddRangeAsync(customers);
+                await context.SaveChangesAsync();
             }
 
-            using (var context = new TestContext())
+            await using (var context = new TestContext())
             {
                 var query = new CustomerTestQuery()
                     .AndNameIsBilly().OrAgeIsOverTwenty();
 
-                var result = context.Customers
+                var result = await context.Customers
                     .NPredicateBuilderEFWhere(query)
-                    .ToList();
+                    .ToListAsync();
 
                 Assert.AreEqual(3, result.Count);
             }
@@ -129,9 +127,12 @@ namespace NPredicateBuilder.Tests
         /// <summary>
         /// Ensures compound filters for databases are correct.
         /// </summary>
+        /// <returns>A <see cref="Task"/> representing the asynchronous unit test.</returns>
         [TestMethod]
-        public void AppendedFilters_FiltersCorrectly()
+        public async Task AppendedFilters_FiltersCorrectly()
         {
+            await TestHelper.ClearTables();
+
             var customers = new List<Customer>
             {
                 new Customer(Guid.NewGuid(), "Billy", 5),
@@ -140,21 +141,21 @@ namespace NPredicateBuilder.Tests
                 new Customer(Guid.NewGuid(), "Bobby", 25),
             };
 
-            using (var context = new TestContext())
+            await using (var context = new TestContext())
             {
-                context.Customers.AddRange(customers);
-                context.SaveChanges();
+                await context.Customers.AddRangeAsync(customers);
+                await context.SaveChangesAsync();
             }
 
-            using (var context = new TestContext())
+            await using (var context = new TestContext())
             {
                 var query = new CustomerTestQuery()
                     .AndNameIsBilly().AndAgeIsOverSix()
                     .Or(new CustomerTestQuery().AndNameIsBobby());
 
-                var result = context.Customers
+                var result = await context.Customers
                     .NPredicateBuilderEFWhere(query)
-                    .ToList();
+                    .ToListAsync();
 
                 Assert.AreEqual(3, result.Count);
             }
