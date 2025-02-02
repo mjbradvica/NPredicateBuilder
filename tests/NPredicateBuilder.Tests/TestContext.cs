@@ -17,8 +17,6 @@ namespace NPredicateBuilder.Tests
         /// </summary>
         public TestContext()
         {
-            Database.EnsureCreated();
-
             Customers = Set<Customer>();
         }
 
