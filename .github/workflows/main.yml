@@ -23,7 +23,7 @@ jobs:
         with:
           connection-string-env-var: TEST_CONNECTION_STRING
           catalog: NPredicateBuilder
-          extra-params: "TrustServerCertificate=true;"
+          extra-params: "MultipleActiveResultSets=true;TrustServerCertificate=true;"
 
       - name: Restore
         run: dotnet restore
