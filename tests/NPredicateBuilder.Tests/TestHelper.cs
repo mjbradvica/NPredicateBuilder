@@ -2,6 +2,8 @@
 // Copyright (c) Michael Bradvica LLC. All rights reserved.
 // </copyright>
 
+using Microsoft.EntityFrameworkCore;
+
 namespace NPredicateBuilder.Tests
 {
     /// <summary>
@@ -33,12 +35,24 @@ namespace NPredicateBuilder.Tests
         /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
         public static async Task ClearTables()
         {
-            await using (var context = new TestContext())
+            await using (var context = new TestContext(GetOptions()))
             {
                 await context.Database.EnsureDeletedAsync();
 
                 await context.Database.EnsureCreatedAsync();
             }
+        }
+
+        /// <summary>
+        /// Get the db options.
+        /// </summary>
+        /// <returns>A context options.</returns>
+        public static DbContextOptions GetOptions()
+        {
+            var connection = Environment.GetEnvironmentVariable("TEST_CONNECTION_STRING") ??
+                             "Server=.\\SQLExpress;Database=NPredicateBuilder;Trusted_Connection=True;MultipleActiveResultSets=true;Integrated Security=True;TrustServerCertificate=true";
+
+            return new DbContextOptionsBuilder().UseSqlServer(connection).Options;
         }
     }
 }
