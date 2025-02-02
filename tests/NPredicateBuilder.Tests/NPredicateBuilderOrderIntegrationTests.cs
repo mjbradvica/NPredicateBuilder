@@ -30,13 +30,13 @@ namespace NPredicateBuilder.Tests
                 TestHelper.Bobby(),
             };
 
-            await using (var context = new TestContext())
+            await using (var context = new TestContext(TestHelper.GetOptions()))
             {
                 await context.Customers.AddRangeAsync(customers);
                 await context.SaveChangesAsync();
             }
 
-            await using (var context = new TestContext())
+            await using (var context = new TestContext(TestHelper.GetOptions()))
             {
                 var order = new CustomerTestOrder().ByName();
 
@@ -64,13 +64,13 @@ namespace NPredicateBuilder.Tests
                 new Customer(Guid.NewGuid(), "Billy", 20),
             };
 
-            await using (var context = new TestContext())
+            await using (var context = new TestContext(TestHelper.GetOptions()))
             {
                 await context.Customers.AddRangeAsync(customers);
                 await context.SaveChangesAsync();
             }
 
-            await using (var context = new TestContext())
+            await using (var context = new TestContext(TestHelper.GetOptions()))
             {
                 var order = new CustomerTestOrder()
                     .ByName()
@@ -101,13 +101,13 @@ namespace NPredicateBuilder.Tests
                 TestHelper.Bobby(),
             };
 
-            await using (var context = new TestContext())
+            await using (var context = new TestContext(TestHelper.GetOptions()))
             {
                 await context.Customers.AddRangeAsync(customers);
                 await context.SaveChangesAsync();
             }
 
-            await using (var context = new TestContext())
+            await using (var context = new TestContext(TestHelper.GetOptions()))
             {
                 var order = new CustomerTestOrder()
                     .ByNameDescending();
@@ -136,13 +136,13 @@ namespace NPredicateBuilder.Tests
                 new Customer(Guid.NewGuid(), "Billy", 20),
             };
 
-            await using (var context = new TestContext())
+            await using (var context = new TestContext(TestHelper.GetOptions()))
             {
                 await context.Customers.AddRangeAsync(customers);
                 await context.SaveChangesAsync();
             }
 
-            await using (var context = new TestContext())
+            await using (var context = new TestContext(TestHelper.GetOptions()))
             {
                 var order = new CustomerTestOrder()
                     .ByName()

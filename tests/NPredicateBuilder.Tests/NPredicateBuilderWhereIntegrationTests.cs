@@ -29,13 +29,13 @@ namespace NPredicateBuilder.Tests
                 TestHelper.Bobby(),
             };
 
-            await using (var context = new TestContext())
+            await using (var context = new TestContext(TestHelper.GetOptions()))
             {
                 await context.Customers.AddRangeAsync(customers);
                 await context.SaveChangesAsync();
             }
 
-            await using (var context = new TestContext())
+            await using (var context = new TestContext(TestHelper.GetOptions()))
             {
                 var query = new CustomerTestQuery()
                     .AndNameIsBobby();
@@ -64,13 +64,13 @@ namespace NPredicateBuilder.Tests
                 correctCustomer, new Customer(Guid.NewGuid(), "Billy", 5), TestHelper.Bobby(),
             };
 
-            await using (var context = new TestContext())
+            await using (var context = new TestContext(TestHelper.GetOptions()))
             {
                 await context.Customers.AddRangeAsync(customers);
                 await context.SaveChangesAsync();
             }
 
-            await using (var context = new TestContext())
+            await using (var context = new TestContext(TestHelper.GetOptions()))
             {
                 var query = new CustomerTestQuery()
                     .AndNameIsBilly().AndAgeIsOverSix();
@@ -101,13 +101,13 @@ namespace NPredicateBuilder.Tests
                 new Customer(Guid.NewGuid(), "Bobby", 25),
             };
 
-            await using (var context = new TestContext())
+            await using (var context = new TestContext(TestHelper.GetOptions()))
             {
                 await context.Customers.AddRangeAsync(customers);
                 await context.SaveChangesAsync();
             }
 
-            await using (var context = new TestContext())
+            await using (var context = new TestContext(TestHelper.GetOptions()))
             {
                 var query = new CustomerTestQuery()
                     .AndNameIsBilly().OrAgeIsOverTwenty();
@@ -137,13 +137,13 @@ namespace NPredicateBuilder.Tests
                 new Customer(Guid.NewGuid(), "Bobby", 25),
             };
 
-            await using (var context = new TestContext())
+            await using (var context = new TestContext(TestHelper.GetOptions()))
             {
                 await context.Customers.AddRangeAsync(customers);
                 await context.SaveChangesAsync();
             }
 
-            await using (var context = new TestContext())
+            await using (var context = new TestContext(TestHelper.GetOptions()))
             {
                 var query = new CustomerTestQuery()
                     .AndNameIsBilly().AndAgeIsOverSix()
