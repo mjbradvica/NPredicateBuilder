@@ -5,7 +5,7 @@
     <Authors>Michael Bradvica</Authors>
     <Description>NPredicateBuilder core library and extensions for LINQ to Objects.</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>5.4.0</Version>
+    <Version>5.5.0</Version>
     <Company>Michael Bradvica LLC.</Company>
     <PackageProjectUrl>https://github.com/mjbradvica/NPredicateBuilder</PackageProjectUrl>
     <RepositoryUrl>https://github.com/mjbradvica/n-predicate-builder</RepositoryUrl>
@@ -13,7 +13,7 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Title>NPredicateBuilder</Title>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <Copyright>Copyright 2024. All Rights Reserved.</Copyright>
+    <Copyright>Copyright 2025. All Rights Reserved.</Copyright>
     <PackageIcon>logo.png</PackageIcon>
     <PackageTags>linq, csharp,</PackageTags>
   </PropertyGroup>
@@ -27,13 +27,6 @@
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="NuGet.CommandLine" Version="6.12.2">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
   </ItemGroup>
 
 </Project>
