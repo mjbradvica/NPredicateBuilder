@@ -2,9 +2,6 @@
 // Copyright (c) Michael Bradvica LLC. All rights reserved.
 // </copyright>
 
-using System;
-using System.Threading.Tasks;
-
 namespace NPredicateBuilder.Tests
 {
     /// <summary>

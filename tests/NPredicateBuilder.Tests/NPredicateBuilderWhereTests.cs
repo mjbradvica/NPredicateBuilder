@@ -4,9 +4,6 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NPredicateBuilder.EF;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace NPredicateBuilder.Tests
 {
@@ -17,6 +14,14 @@ namespace NPredicateBuilder.Tests
     public class NPredicateBuilderWhereTests
     {
         private IEnumerable<Customer> _customers;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NPredicateBuilderWhereTests"/> class.
+        /// </summary>
+        public NPredicateBuilderWhereTests()
+        {
+            _customers = new List<Customer>();
+        }
 
         /// <summary>
         /// Ensures where filters for IEnumerable are correct.

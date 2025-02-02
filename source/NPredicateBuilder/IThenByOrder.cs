@@ -2,8 +2,6 @@
 // Copyright (c) Michael Bradvica LLC. All rights reserved.
 // </copyright>
 
-using System.Linq;
-
 namespace NPredicateBuilder
 {
     /// <summary>

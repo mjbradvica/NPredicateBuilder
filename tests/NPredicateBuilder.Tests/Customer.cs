@@ -2,8 +2,6 @@
 // Copyright (c) Michael Bradvica LLC. All rights reserved.
 // </copyright>
 
-using System;
-
 namespace NPredicateBuilder.Tests
 {
     /// <summary>
@@ -30,6 +28,8 @@ namespace NPredicateBuilder.Tests
         /// </summary>
         public Customer()
         {
+            Id = Guid.NewGuid();
+            Name = string.Empty;
         }
 
         /// <summary>

@@ -3,8 +3,6 @@
 // </copyright>
 
 using LinqKit;
-using System;
-using System.Linq;
 
 namespace NPredicateBuilder.EF
 {
