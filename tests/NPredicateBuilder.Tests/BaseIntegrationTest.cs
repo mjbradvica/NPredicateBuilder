@@ -19,18 +19,16 @@ namespace NPredicateBuilder.Tests
         protected BaseIntegrationTest()
         {
             _connection = new SqliteConnection("DataSource=myshareddb;mode=memory;cache=shared");
+
             _connection.Open();
 
             ContextOptions = new DbContextOptionsBuilder().UseSqlite(_connection).Options;
 
             using (var context = new TestContext(ContextOptions))
             {
-                if (context.Database.CanConnect())
-                {
-                    context.Database.EnsureDeleted();
+                context.Database.EnsureDeleted();
 
-                    context.Database.EnsureCreated();
-                }
+                context.Database.EnsureCreated();
             }
         }
 

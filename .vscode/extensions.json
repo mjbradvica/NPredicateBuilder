@@ -6,6 +6,7 @@
     "editorconfig.editorconfig",
     "eamodio.gitlens",
     "streetsidesoftware.code-spell-checker",
-    "znck.grammarly"
+    "znck.grammarly",
+    "github.vscode-github-actions"
   ]
 }
