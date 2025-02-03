@@ -11,7 +11,7 @@ namespace NPredicateBuilder.Tests
     /// <inheritdoc />
     public abstract class BaseIntegrationTest : IDisposable
     {
-        private readonly DbConnection _connection;
+        private DbConnection? _connection;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BaseIntegrationTest"/> class.
@@ -42,7 +42,24 @@ namespace NPredicateBuilder.Tests
         /// <inheritdoc/>
         public void Dispose()
         {
-            _connection.Dispose();
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// Cleans up managed resources.
+        /// </summary>
+        /// <param name="disposing">A value determining a proper dispose.</param>
+        private void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (_connection != null)
+                {
+                    _connection.Dispose();
+                    _connection = null;
+                }
+            }
         }
     }
 }
