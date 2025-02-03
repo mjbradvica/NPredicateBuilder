@@ -37,7 +37,7 @@ namespace NPredicateBuilder.Tests
         {
             await using (var context = new TestContext(GetOptions()))
             {
-                if (context.Database.CanConnect())
+                if (await context.Database.CanConnectAsync())
                 {
                     await context.Database.EnsureDeletedAsync();
 
@@ -52,10 +52,7 @@ namespace NPredicateBuilder.Tests
         /// <returns>A context options.</returns>
         public static DbContextOptions GetOptions()
         {
-            var connection = Environment.GetEnvironmentVariable("TEST_CONNECTION_STRING") ??
-                             "Server=.\\SQLExpress;Database=NPredicateBuilder;Trusted_Connection=True;MultipleActiveResultSets=true;Integrated Security=True;TrustServerCertificate=true";
-
-            return new DbContextOptionsBuilder().UseSqlServer(connection).Options;
+            return new DbContextOptionsBuilder().UseInMemoryDatabase("NPredicateBuilder").Options;
         }
     }
 }
