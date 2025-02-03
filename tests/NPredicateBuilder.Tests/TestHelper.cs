@@ -2,6 +2,7 @@
 // Copyright (c) Michael Bradvica LLC. All rights reserved.
 // </copyright>
 
+using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 
 namespace NPredicateBuilder.Tests
@@ -27,32 +28,6 @@ namespace NPredicateBuilder.Tests
         public static Customer Bobby()
         {
             return new Customer(Guid.NewGuid(), "Bobby", 30);
-        }
-
-        /// <summary>
-        /// Resets the database.
-        /// </summary>
-        /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
-        public static async Task ClearTables()
-        {
-            await using (var context = new TestContext(GetOptions()))
-            {
-                if (await context.Database.CanConnectAsync())
-                {
-                    await context.Database.EnsureDeletedAsync();
-
-                    await context.Database.EnsureCreatedAsync();
-                }
-            }
-        }
-
-        /// <summary>
-        /// Get the db options.
-        /// </summary>
-        /// <returns>A context options.</returns>
-        public static DbContextOptions GetOptions()
-        {
-            return new DbContextOptionsBuilder().UseInMemoryDatabase("NPredicateBuilder").Options;
         }
     }
 }

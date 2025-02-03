@@ -12,7 +12,7 @@ namespace NPredicateBuilder.Tests
     /// Order tests for EF databases.
     /// </summary>
     [TestClass]
-    public class NPredicateBuilderOrderIntegrationTests
+    public class NPredicateBuilderOrderIntegrationTests : BaseIntegrationTest
     {
         /// <summary>
         /// Ensure orders for databases are correct.
@@ -21,8 +21,6 @@ namespace NPredicateBuilder.Tests
         [TestMethod]
         public async Task OrderBy_OrdersCorrectlyAsync()
         {
-            await TestHelper.ClearTables();
-
             var customers = new List<Customer>
             {
                 TestHelper.Bobby(),
@@ -30,7 +28,7 @@ namespace NPredicateBuilder.Tests
                 TestHelper.Bobby(),
             };
 
-            await using (var context = new TestContext(TestHelper.GetOptions()))
+            await using (var context = new TestContext(ContextOptions))
             {
                 await context.Customers.AddRangeAsync(customers);
                 await context.SaveChangesAsync();
@@ -38,7 +36,7 @@ namespace NPredicateBuilder.Tests
 
             List<Customer> results;
 
-            await using (var context = new TestContext(TestHelper.GetOptions()))
+            await using (var context = new TestContext(ContextOptions))
             {
                 var order = new CustomerTestOrder().ByName();
 
@@ -57,8 +55,6 @@ namespace NPredicateBuilder.Tests
         [TestMethod]
         public async Task ThenBy_OrdersCorrectlyAsync()
         {
-            await TestHelper.ClearTables();
-
             var customers = new List<Customer>
             {
                 new Customer(Guid.NewGuid(), "Bobby", 30),
@@ -66,7 +62,7 @@ namespace NPredicateBuilder.Tests
                 new Customer(Guid.NewGuid(), "Billy", 20),
             };
 
-            await using (var context = new TestContext(TestHelper.GetOptions()))
+            await using (var context = new TestContext(ContextOptions))
             {
                 await context.Customers.AddRangeAsync(customers);
                 await context.SaveChangesAsync();
@@ -74,7 +70,7 @@ namespace NPredicateBuilder.Tests
 
             List<Customer> results;
 
-            await using (var context = new TestContext(TestHelper.GetOptions()))
+            await using (var context = new TestContext(ContextOptions))
             {
                 var order = new CustomerTestOrder()
                     .ByName()
@@ -96,8 +92,6 @@ namespace NPredicateBuilder.Tests
         [TestMethod]
         public async Task OrderByDescending_OrdersCorrectlyAsync()
         {
-            await TestHelper.ClearTables();
-
             var customers = new List<Customer>
             {
                 TestHelper.Bobby(),
@@ -105,7 +99,7 @@ namespace NPredicateBuilder.Tests
                 TestHelper.Bobby(),
             };
 
-            await using (var context = new TestContext(TestHelper.GetOptions()))
+            await using (var context = new TestContext(ContextOptions))
             {
                 await context.Customers.AddRangeAsync(customers);
                 await context.SaveChangesAsync();
@@ -113,7 +107,7 @@ namespace NPredicateBuilder.Tests
 
             List<Customer> results;
 
-            await using (var context = new TestContext(TestHelper.GetOptions()))
+            await using (var context = new TestContext(ContextOptions))
             {
                 var order = new CustomerTestOrder()
                     .ByNameDescending();
@@ -133,8 +127,6 @@ namespace NPredicateBuilder.Tests
         [TestMethod]
         public async Task ThenByDescending_OrdersCorrectly()
         {
-            await TestHelper.ClearTables();
-
             var customers = new List<Customer>
             {
                 new Customer(Guid.NewGuid(), "Bobby", 30),
@@ -142,7 +134,7 @@ namespace NPredicateBuilder.Tests
                 new Customer(Guid.NewGuid(), "Billy", 20),
             };
 
-            await using (var context = new TestContext(TestHelper.GetOptions()))
+            await using (var context = new TestContext(ContextOptions))
             {
                 await context.Customers.AddRangeAsync(customers);
                 await context.SaveChangesAsync();
@@ -150,7 +142,7 @@ namespace NPredicateBuilder.Tests
 
             List<Customer> results;
 
-            await using (var context = new TestContext(TestHelper.GetOptions()))
+            await using (var context = new TestContext(ContextOptions))
             {
                 var order = new CustomerTestOrder()
                     .ByName()

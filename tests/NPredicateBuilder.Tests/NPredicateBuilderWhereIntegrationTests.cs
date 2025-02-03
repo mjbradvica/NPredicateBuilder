@@ -12,7 +12,7 @@ namespace NPredicateBuilder.Tests
     /// Tests where filters for EF databases.
     /// </summary>
     [TestClass]
-    public class NPredicateBuilderWhereIntegrationTests
+    public class NPredicateBuilderWhereIntegrationTests : BaseIntegrationTest
     {
         /// <summary>
         /// Ensures where filters for databases are correct.
@@ -21,15 +21,13 @@ namespace NPredicateBuilder.Tests
         [TestMethod]
         public async Task Where_DbSet_FiltersCorrectly()
         {
-            await TestHelper.ClearTables();
-
             var customers = new List<Customer>
             {
                 TestHelper.Billy(),
                 TestHelper.Bobby(),
             };
 
-            await using (var context = new TestContext(TestHelper.GetOptions()))
+            await using (var context = new TestContext(ContextOptions))
             {
                 await context.Customers.AddRangeAsync(customers);
                 await context.SaveChangesAsync();
@@ -37,7 +35,7 @@ namespace NPredicateBuilder.Tests
 
             List<Customer> results;
 
-            await using (var context = new TestContext(TestHelper.GetOptions()))
+            await using (var context = new TestContext(ContextOptions))
             {
                 var query = new CustomerTestQuery()
                     .AndNameIsBobby();
@@ -57,8 +55,6 @@ namespace NPredicateBuilder.Tests
         [TestMethod]
         public async Task MultipleAndFilters_FiltersCorrectly()
         {
-            await TestHelper.ClearTables();
-
             var correctCustomer = new Customer(Guid.NewGuid(), "Billy", 10);
 
             var customers = new List<Customer>
@@ -66,7 +62,7 @@ namespace NPredicateBuilder.Tests
                 correctCustomer, new Customer(Guid.NewGuid(), "Billy", 5), TestHelper.Bobby(),
             };
 
-            await using (var context = new TestContext(TestHelper.GetOptions()))
+            await using (var context = new TestContext(ContextOptions))
             {
                 await context.Customers.AddRangeAsync(customers);
                 await context.SaveChangesAsync();
@@ -74,7 +70,7 @@ namespace NPredicateBuilder.Tests
 
             List<Customer> results;
 
-            await using (var context = new TestContext(TestHelper.GetOptions()))
+            await using (var context = new TestContext(ContextOptions))
             {
                 var query = new CustomerTestQuery()
                     .AndNameIsBilly().AndAgeIsOverSix();
@@ -95,8 +91,6 @@ namespace NPredicateBuilder.Tests
         [TestMethod]
         public async Task CombinedAndOrFilters_FiltersCorrectly()
         {
-            await TestHelper.ClearTables();
-
             var customers = new List<Customer>
             {
                 new Customer(Guid.NewGuid(), "Billy", 5),
@@ -105,7 +99,7 @@ namespace NPredicateBuilder.Tests
                 new Customer(Guid.NewGuid(), "Bobby", 25),
             };
 
-            await using (var context = new TestContext(TestHelper.GetOptions()))
+            await using (var context = new TestContext(ContextOptions))
             {
                 await context.Customers.AddRangeAsync(customers);
                 await context.SaveChangesAsync();
@@ -113,7 +107,7 @@ namespace NPredicateBuilder.Tests
 
             List<Customer> results;
 
-            await using (var context = new TestContext(TestHelper.GetOptions()))
+            await using (var context = new TestContext(ContextOptions))
             {
                 var query = new CustomerTestQuery()
                     .AndNameIsBilly().OrAgeIsOverTwenty();
@@ -133,8 +127,6 @@ namespace NPredicateBuilder.Tests
         [TestMethod]
         public async Task AppendedFilters_FiltersCorrectly()
         {
-            await TestHelper.ClearTables();
-
             var customers = new List<Customer>
             {
                 new Customer(Guid.NewGuid(), "Billy", 5),
@@ -143,7 +135,7 @@ namespace NPredicateBuilder.Tests
                 new Customer(Guid.NewGuid(), "Bobby", 25),
             };
 
-            await using (var context = new TestContext(TestHelper.GetOptions()))
+            await using (var context = new TestContext(ContextOptions))
             {
                 await context.Customers.AddRangeAsync(customers);
                 await context.SaveChangesAsync();
@@ -151,7 +143,7 @@ namespace NPredicateBuilder.Tests
 
             List<Customer> results;
 
-            await using (var context = new TestContext(TestHelper.GetOptions()))
+            await using (var context = new TestContext(ContextOptions))
             {
                 var query = new CustomerTestQuery()
                     .AndNameIsBilly().AndAgeIsOverSix()
