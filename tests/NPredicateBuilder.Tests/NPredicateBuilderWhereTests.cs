@@ -255,5 +255,49 @@ namespace NPredicateBuilder.Tests
 
             Assert.AreEqual(2, result.Count);
         }
+
+        /// <summary>
+        /// Compound AND query with invalid current only uses next.
+        /// </summary>
+        [TestMethod]
+        public void And_NullExpression_ValidNewExpression_UsesNewExpression()
+        {
+            _customers = new List<Customer>
+            {
+                new Customer(Guid.NewGuid(), "Billy", 5),
+                new Customer(Guid.NewGuid(), "Billy", 25),
+            };
+
+            var query = new CustomerTestQuery()
+                .And(new CustomerTestQuery().AndAgeIsOverSix());
+
+            var result = _customers
+                .NPredicateBuilderWhere(query)
+                .ToList();
+
+            Assert.AreEqual(1, result.Count);
+        }
+
+        /// <summary>
+        /// Compound OR query with invalid current only uses next expression.
+        /// </summary>
+        [TestMethod]
+        public void Or_NullExpression_ValidNewExpression_UsesNewExpression()
+        {
+            _customers = new List<Customer>
+            {
+                new Customer(Guid.NewGuid(), "Billy", 5),
+                new Customer(Guid.NewGuid(), "Billy", 25),
+            };
+
+            var query = new CustomerTestQuery()
+                .Or(new CustomerTestQuery().AndAgeIsOverSix());
+
+            var result = _customers
+                .NPredicateBuilderWhere(query)
+                .ToList();
+
+            Assert.AreEqual(1, result.Count);
+        }
     }
 }

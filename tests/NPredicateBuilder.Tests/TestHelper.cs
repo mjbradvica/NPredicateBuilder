@@ -2,9 +2,6 @@
 // Copyright (c) Michael Bradvica LLC. All rights reserved.
 // </copyright>
 
-using Microsoft.Data.Sqlite;
-using Microsoft.EntityFrameworkCore;
-
 namespace NPredicateBuilder.Tests
 {
     /// <summary>
