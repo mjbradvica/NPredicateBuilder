@@ -36,16 +36,18 @@ namespace NPredicateBuilder.Tests
                 await context.SaveChangesAsync();
             }
 
+            List<Customer> results;
+
             await using (var context = new TestContext(TestHelper.GetOptions()))
             {
                 var order = new CustomerTestOrder().ByName();
 
-                var result = await context.Customers
+                results = await context.Customers
                     .NPredicateBuilderEFOrder(order)
                     .ToListAsync();
-
-                Assert.AreEqual("Billy", result.First().Name);
             }
+
+            Assert.AreEqual("Billy", results.First().Name);
         }
 
         /// <summary>
@@ -70,19 +72,21 @@ namespace NPredicateBuilder.Tests
                 await context.SaveChangesAsync();
             }
 
+            List<Customer> results;
+
             await using (var context = new TestContext(TestHelper.GetOptions()))
             {
                 var order = new CustomerTestOrder()
                     .ByName()
                     .ThenByAge();
 
-                var result = await context.Customers
+                results = await context.Customers
                     .NPredicateBuilderEFOrder(order)
                     .ToListAsync();
-
-                Assert.AreEqual("Billy", result.First().Name);
-                Assert.AreEqual(20, result.First().Age);
             }
+
+            Assert.AreEqual("Billy", results.First().Name);
+            Assert.AreEqual(20, results.First().Age);
         }
 
         /// <summary>
@@ -107,17 +111,19 @@ namespace NPredicateBuilder.Tests
                 await context.SaveChangesAsync();
             }
 
+            List<Customer> results;
+
             await using (var context = new TestContext(TestHelper.GetOptions()))
             {
                 var order = new CustomerTestOrder()
                     .ByNameDescending();
 
-                var result = await context.Customers
+                results = await context.Customers
                     .NPredicateBuilderEFOrder(order)
                     .ToListAsync();
-
-                Assert.AreEqual("Billy", result.Last().Name);
             }
+
+            Assert.AreEqual("Billy", results.Last().Name);
         }
 
         /// <summary>
@@ -142,19 +148,21 @@ namespace NPredicateBuilder.Tests
                 await context.SaveChangesAsync();
             }
 
+            List<Customer> results;
+
             await using (var context = new TestContext(TestHelper.GetOptions()))
             {
                 var order = new CustomerTestOrder()
                     .ByName()
                     .ThenByAgeDescending();
 
-                var result = await context.Customers
+                results = await context.Customers
                     .NPredicateBuilderEFOrder(order)
                     .ToListAsync();
-
-                Assert.AreEqual("Billy", result.First().Name);
-                Assert.AreEqual(30, result.First().Age);
             }
+
+            Assert.AreEqual("Billy", results.First().Name);
+            Assert.AreEqual(30, results.First().Age);
         }
     }
 }

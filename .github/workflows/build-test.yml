@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04
+    runs-on: windows-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -20,12 +20,12 @@ jobs:
             8.0.x
             9.0.x
 
-      - name: Install SQL Server
-        uses: Particular/install-sql-server-action@v1.2.0
-        with:
-          connection-string-env-var: TEST_CONNECTION_STRING
-          catalog: NPredicateBuilder
-          extra-params: "MultipleActiveResultSets=true;TrustServerCertificate=true;"
+      # - name: Install SQL Server
+      #   uses: Particular/install-sql-server-action@v1.2.0
+      #   with:
+      #     connection-string-env-var: TEST_CONNECTION_STRING
+      #     catalog: NPredicateBuilder
+      #     extra-params: "MultipleActiveResultSets=true;TrustServerCertificate=true;"
 
       - name: Restore
         run: dotnet restore
@@ -37,4 +37,4 @@ jobs:
         run: dotnet build --no-restore -c Release 
 
       - name: Test
-        run: dotnet test --no-build --verbosity normal -c Release /p:CollectCoverage=true /p:Threshold=100 /p:ThresholdType=branch
+        run: dotnet test --no-build --no-restore --verbosity normal -c Release /p:CollectCoverage=true /p:Threshold=100 /p:ThresholdType=branch

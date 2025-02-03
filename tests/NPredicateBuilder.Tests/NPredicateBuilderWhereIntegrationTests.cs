@@ -35,17 +35,19 @@ namespace NPredicateBuilder.Tests
                 await context.SaveChangesAsync();
             }
 
+            List<Customer> results;
+
             await using (var context = new TestContext(TestHelper.GetOptions()))
             {
                 var query = new CustomerTestQuery()
                     .AndNameIsBobby();
 
-                var result = await context.Customers
+                results = await context.Customers
                     .NPredicateBuilderEFWhere(query)
                     .ToListAsync();
-
-                Assert.AreEqual("Bobby", result.Single().Name);
             }
+
+            Assert.AreEqual("Bobby", results.Single().Name);
         }
 
         /// <summary>
@@ -70,18 +72,20 @@ namespace NPredicateBuilder.Tests
                 await context.SaveChangesAsync();
             }
 
+            List<Customer> results;
+
             await using (var context = new TestContext(TestHelper.GetOptions()))
             {
                 var query = new CustomerTestQuery()
                     .AndNameIsBilly().AndAgeIsOverSix();
 
-                var result = await context.Customers
+                results = await context.Customers
                     .NPredicateBuilderEFWhere(query)
                     .ToListAsync();
-
-                Assert.AreEqual(correctCustomer.Name, result.Single().Name);
-                Assert.AreEqual(correctCustomer.Age, result.Single().Age);
             }
+
+            Assert.AreEqual(correctCustomer.Name, results.Single().Name);
+            Assert.AreEqual(correctCustomer.Age, results.Single().Age);
         }
 
         /// <summary>
@@ -107,17 +111,19 @@ namespace NPredicateBuilder.Tests
                 await context.SaveChangesAsync();
             }
 
+            List<Customer> results;
+
             await using (var context = new TestContext(TestHelper.GetOptions()))
             {
                 var query = new CustomerTestQuery()
                     .AndNameIsBilly().OrAgeIsOverTwenty();
 
-                var result = await context.Customers
+                results = await context.Customers
                     .NPredicateBuilderEFWhere(query)
                     .ToListAsync();
-
-                Assert.AreEqual(3, result.Count);
             }
+
+            Assert.AreEqual(3, results.Count);
         }
 
         /// <summary>
@@ -143,18 +149,20 @@ namespace NPredicateBuilder.Tests
                 await context.SaveChangesAsync();
             }
 
+            List<Customer> results;
+
             await using (var context = new TestContext(TestHelper.GetOptions()))
             {
                 var query = new CustomerTestQuery()
                     .AndNameIsBilly().AndAgeIsOverSix()
                     .Or(new CustomerTestQuery().AndNameIsBobby());
 
-                var result = await context.Customers
+                results = await context.Customers
                     .NPredicateBuilderEFWhere(query)
                     .ToListAsync();
-
-                Assert.AreEqual(3, result.Count);
             }
+
+            Assert.AreEqual(3, results.Count);
         }
     }
 }

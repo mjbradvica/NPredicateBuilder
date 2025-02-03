@@ -25,5 +25,16 @@ namespace NPredicateBuilder.Tests
         /// Gets a DbSet for a Customer table.
         /// </summary>
         public DbSet<Customer> Customers { get; }
+
+        /// <inheritdoc/>
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder
+                .Entity<Customer>()
+                .Property(customer => customer.Id)
+                .ValueGeneratedNever();
+        }
     }
 }

@@ -37,9 +37,12 @@ namespace NPredicateBuilder.Tests
         {
             await using (var context = new TestContext(GetOptions()))
             {
-                await context.Database.EnsureDeletedAsync();
+                if (context.Database.CanConnect())
+                {
+                    await context.Database.EnsureDeletedAsync();
 
-                await context.Database.EnsureCreatedAsync();
+                    await context.Database.EnsureCreatedAsync();
+                }
             }
         }
 
