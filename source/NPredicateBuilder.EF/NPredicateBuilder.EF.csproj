@@ -5,7 +5,7 @@
     <Authors>Michael Bradvica</Authors>
     <Version>5.4.0</Version>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <Company>Michael Bradvica LLC.</Company>
+    <Company>Simplex Software LLC</Company>
     <Description>NPredicateBuilder extensions for Entity Framework.</Description>
     <PackageProjectUrl>https://github.com/mjbradvica/NPredicateBuilder</PackageProjectUrl>
     <RepositoryUrl>https://github.com/mjbradvica/n-predicate-builder</RepositoryUrl>
@@ -13,7 +13,7 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Title>NPredicateBuilder.EF</Title>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <Copyright>Copyright 2025. All Rights Reserved.</Copyright>
+    <Copyright>Copyright (c) Simplex Software LLC 2025. All rights reserved.</Copyright>
     <PackageIcon>logo.png</PackageIcon>
     <PackageTags>linq, csharp,</PackageTags>
   </PropertyGroup>

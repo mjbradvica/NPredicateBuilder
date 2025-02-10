@@ -5,15 +5,15 @@
     <Authors>Michael Bradvica</Authors>
     <Description>NPredicateBuilder core library and extensions for LINQ to Objects.</Description>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <Version>5.5.0</Version>
-    <Company>Michael Bradvica LLC.</Company>
+    <Version>5.4.0</Version>
+    <Company>Simplex Software LLC</Company>
     <PackageProjectUrl>https://github.com/mjbradvica/NPredicateBuilder</PackageProjectUrl>
     <RepositoryUrl>https://github.com/mjbradvica/n-predicate-builder</RepositoryUrl>
     <RepositoryType>Library</RepositoryType>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Title>NPredicateBuilder</Title>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <Copyright>Copyright 2025. All Rights Reserved.</Copyright>
+    <Copyright>Copyright (c) Simplex Software LLC 2025. All rights reserved.</Copyright>
     <PackageIcon>logo.png</PackageIcon>
     <PackageTags>linq, csharp,</PackageTags>
   </PropertyGroup>

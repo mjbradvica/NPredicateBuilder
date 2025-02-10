@@ -1,5 +1,5 @@
-﻿// <copyright file="StudentCourse.cs" company="Michael Bradvica LLC">
-// Copyright (c) Michael Bradvica LLC. All rights reserved.
+﻿// <copyright file="StudentCourse.cs" company="Simplex Software LLC">
+// Copyright (c) Simplex Software LLC. All rights reserved.
 // </copyright>
 
 namespace NPredicateBuilder.Samples.School
