@@ -1,63 +1,40 @@
-﻿// <copyright file="TestContext.cs" company="Michael Bradvica LLC">
-// Copyright (c) Michael Bradvica LLC. All rights reserved.
+﻿// <copyright file="TestContext.cs" company="Simplex Software LLC">
+// Copyright (c) Simplex Software LLC. All rights reserved.
 // </copyright>
 
-#if NETFRAMEWORK
-using System;
-using System.Data.Entity;
-
-namespace NPredicateBuilder.Tests
-{
-#else
 using Microsoft.EntityFrameworkCore;
-using System;
 
 namespace NPredicateBuilder.Tests
 {
-#endif
-
     /// <summary>
     /// EF Context for testing.
     /// </summary>
     public sealed class TestContext : DbContext
     {
-#if NETFRAMEWORK
         /// <summary>
         /// Initializes a new instance of the <see cref="TestContext"/> class.
         /// </summary>
-        public TestContext()
-            : base(Environment.GetEnvironmentVariable("TEST_CONNECTION_STRING") ??
-                   "Server=.\\SQLExpress;Database=NPredicateBuilder;Trusted_Connection=True;MultipleActiveResultSets=true;Integrated Security=True;TrustServerCertificate=true")
+        /// <param name="options">The context options class.</param>
+        public TestContext(DbContextOptions options)
+            : base(options)
         {
+            Customers = Set<Customer>();
         }
-#else
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TestContext"/> class.
-        /// </summary>
-        public TestContext()
-        {
-            Database.EnsureCreated();
-        }
-#endif
 
         /// <summary>
-        /// Gets or sets a DbSet for a Customer table.
+        /// Gets a DbSet for a Customer table.
         /// </summary>
-        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Customer> Customers { get; }
 
-#if NETFRAMEWORK
-#else
-        /// <summary>
-        /// Configures the database connection.
-        /// </summary>
-        /// <param name="optionsBuilder">Allow further options for database configuration.</param>
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        /// <inheritdoc/>
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            var connectionString = Environment.GetEnvironmentVariable("TEST_CONNECTION_STRING") ??
-                                   "Server=.\\SQLExpress;Database=NPredicateBuilder;Trusted_Connection=True;MultipleActiveResultSets=true;Integrated Security=True;TrustServerCertificate=true";
+            base.OnModelCreating(modelBuilder);
 
-            optionsBuilder.UseSqlServer(connectionString);
+            modelBuilder
+                .Entity<Customer>()
+                .Property(customer => customer.Id)
+                .ValueGeneratedNever();
         }
-#endif
     }
 }

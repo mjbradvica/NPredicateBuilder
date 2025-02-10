@@ -1,8 +1,6 @@
-﻿// <copyright file="IBaseOrder.cs" company="Michael Bradvica LLC">
-// Copyright (c) Michael Bradvica LLC. All rights reserved.
+﻿// <copyright file="IBaseOrder.cs" company="Simplex Software LLC">
+// Copyright (c) Simplex Software LLC. All rights reserved.
 // </copyright>
-
-using System.Collections.Generic;
 
 namespace NPredicateBuilder
 {
@@ -15,7 +13,7 @@ namespace NPredicateBuilder
         /// <summary>
         /// Gets the first order expression. This is used by the OrderBy function.
         /// </summary>
-        IOrder<TEntity> FirstOrder { get; }
+        IOrder<TEntity>? FirstOrder { get; }
 
         /// <summary>
         /// Gets the secondary order expressions. This is used by the ThenBy functions.

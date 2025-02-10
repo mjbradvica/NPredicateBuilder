@@ -1,8 +1,6 @@
-﻿// <copyright file="Customer.cs" company="Michael Bradvica LLC">
-// Copyright (c) Michael Bradvica LLC. All rights reserved.
+﻿// <copyright file="Customer.cs" company="Simplex Software LLC">
+// Copyright (c) Simplex Software LLC. All rights reserved.
 // </copyright>
-
-using System;
 
 namespace NPredicateBuilder.Tests
 {
@@ -30,6 +28,8 @@ namespace NPredicateBuilder.Tests
         /// </summary>
         public Customer()
         {
+            Id = Guid.NewGuid();
+            Name = string.Empty;
         }
 
         /// <summary>

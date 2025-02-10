@@ -1,10 +1,7 @@
-﻿// <copyright file="BaseOrder.cs" company="Michael Bradvica LLC">
-// Copyright (c) Michael Bradvica LLC. All rights reserved.
+﻿// <copyright file="BaseOrder.cs" company="Simplex Software LLC">
+// Copyright (c) Simplex Software LLC. All rights reserved.
 // </copyright>
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 
 namespace NPredicateBuilder
@@ -23,10 +20,10 @@ namespace NPredicateBuilder
         }
 
         /// <inheritdoc />
-        public IOrder<TEntity> FirstOrder { get; private set; }
+        public IOrder<TEntity>? FirstOrder { get; private set; }
 
         /// <inheritdoc />
-        public IEnumerable<IThenByOrder<TEntity>> SecondaryOrders => _secondaryOrders;
+        public IEnumerable<IThenByOrder<TEntity>> SecondaryOrders => _secondaryOrders.AsEnumerable();
 
         /// <summary>
         /// States the first order by operation to be executed. If one is already present, this will overwrite the current operation.

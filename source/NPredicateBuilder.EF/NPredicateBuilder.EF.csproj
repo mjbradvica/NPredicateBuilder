@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net480;netcoreapp3.1;net5.0;net6.0;net7.0;net8.0</TargetFrameworks>
+    <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
     <Authors>Michael Bradvica</Authors>
-    <Version>5.3.0</Version>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Company>Michael Bradvica LLC.</Company>
+    <Version>5.4.0</Version>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <Company>Simplex Software LLC</Company>
     <Description>NPredicateBuilder extensions for Entity Framework.</Description>
     <PackageProjectUrl>https://github.com/mjbradvica/NPredicateBuilder</PackageProjectUrl>
     <RepositoryUrl>https://github.com/mjbradvica/n-predicate-builder</RepositoryUrl>
@@ -13,7 +13,7 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Title>NPredicateBuilder.EF</Title>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <Copyright>Copyright 2024. All Rights Reserved.</Copyright>
+    <Copyright>Copyright (c) Simplex Software LLC 2025. All rights reserved.</Copyright>
     <PackageIcon>logo.png</PackageIcon>
     <PackageTags>linq, csharp,</PackageTags>
   </PropertyGroup>
@@ -30,31 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    
+    <PackageReference Include="LinqKit.Microsoft.EntityFrameworkCore" Version="9.0.8" />
     <PackageReference Include="NPredicateBuilder" Version="5.3.0" />
-  </ItemGroup>
-
-  <ItemGroup Condition="'$(TargetFramework)' == 'net480'">
-    <PackageReference Include="LinqKit.EntityFramework" Version="1.2.5" />
-  </ItemGroup>
-
-  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
-    <PackageReference Include="LinqKit.Microsoft.EntityFrameworkCore" Version="3.2.5" />
-  </ItemGroup>
-
-  <ItemGroup Condition="'$(TargetFramework)' == 'net5.0'">
-    <PackageReference Include="LinqKit.Microsoft.EntityFrameworkCore" Version="5.1.5" />
-  </ItemGroup>
-
-  <ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
-    <PackageReference Include="LinqKit.Microsoft.EntityFrameworkCore" Version="6.1.5" />
-  </ItemGroup>
-
-	<ItemGroup Condition="'$(TargetFramework)' == 'net7.0'">
-		<PackageReference Include="LinqKit.Microsoft.EntityFrameworkCore" Version="7.1.5" />
-	</ItemGroup>
-
-  <ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">
-    <PackageReference Include="LinqKit.Microsoft.EntityFrameworkCore" Version="8.1.5" />
   </ItemGroup>
 </Project>

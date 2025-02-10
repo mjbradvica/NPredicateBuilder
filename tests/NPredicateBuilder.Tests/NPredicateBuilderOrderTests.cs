@@ -1,12 +1,9 @@
-﻿// <copyright file="NPredicateBuilderOrderTests.cs" company="Michael Bradvica LLC">
-// Copyright (c) Michael Bradvica LLC. All rights reserved.
+﻿// <copyright file="NPredicateBuilderOrderTests.cs" company="Simplex Software LLC">
+// Copyright (c) Simplex Software LLC. All rights reserved.
 // </copyright>
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NPredicateBuilder.EF;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace NPredicateBuilder.Tests
 {
@@ -16,7 +13,7 @@ namespace NPredicateBuilder.Tests
     [TestClass]
     public class NPredicateBuilderOrderTests
     {
-        private IEnumerable<Customer> _customers;
+        private IEnumerable<Customer>? _customers;
 
         /// <summary>
         /// Ensures ordering for IEnumerable are correct.

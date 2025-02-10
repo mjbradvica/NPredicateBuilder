@@ -1,8 +1,7 @@
-﻿// <copyright file="IBaseQuery.cs" company="Michael Bradvica LLC">
-// Copyright (c) Michael Bradvica LLC. All rights reserved.
+﻿// <copyright file="IBaseQuery.cs" company="Simplex Software LLC">
+// Copyright (c) Simplex Software LLC. All rights reserved.
 // </copyright>
 
-using System;
 using System.Linq.Expressions;
 
 namespace NPredicateBuilder
@@ -16,6 +15,6 @@ namespace NPredicateBuilder
         /// <summary>
         /// Gets the current Expression that will be used to query a collection.
         /// </summary>
-        Expression<Func<TEntity, bool>> SearchExpression { get; }
+        Expression<Func<TEntity, bool>>? SearchExpression { get; }
     }
 }

@@ -1,12 +1,9 @@
-﻿// <copyright file="NPredicateBuilderWhereTests.cs" company="Michael Bradvica LLC">
-// Copyright (c) Michael Bradvica LLC. All rights reserved.
+﻿// <copyright file="NPredicateBuilderWhereTests.cs" company="Simplex Software LLC">
+// Copyright (c) Simplex Software LLC. All rights reserved.
 // </copyright>
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NPredicateBuilder.EF;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace NPredicateBuilder.Tests
 {
@@ -17,6 +14,14 @@ namespace NPredicateBuilder.Tests
     public class NPredicateBuilderWhereTests
     {
         private IEnumerable<Customer> _customers;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NPredicateBuilderWhereTests"/> class.
+        /// </summary>
+        public NPredicateBuilderWhereTests()
+        {
+            _customers = new List<Customer>();
+        }
 
         /// <summary>
         /// Ensures where filters for IEnumerable are correct.
@@ -249,6 +254,50 @@ namespace NPredicateBuilder.Tests
                 .ToList();
 
             Assert.AreEqual(2, result.Count);
+        }
+
+        /// <summary>
+        /// Compound AND query with invalid current only uses next.
+        /// </summary>
+        [TestMethod]
+        public void And_NullExpression_ValidNewExpression_UsesNewExpression()
+        {
+            _customers = new List<Customer>
+            {
+                new Customer(Guid.NewGuid(), "Billy", 5),
+                new Customer(Guid.NewGuid(), "Billy", 25),
+            };
+
+            var query = new CustomerTestQuery()
+                .And(new CustomerTestQuery().AndAgeIsOverSix());
+
+            var result = _customers
+                .NPredicateBuilderWhere(query)
+                .ToList();
+
+            Assert.AreEqual(1, result.Count);
+        }
+
+        /// <summary>
+        /// Compound OR query with invalid current only uses next expression.
+        /// </summary>
+        [TestMethod]
+        public void Or_NullExpression_ValidNewExpression_UsesNewExpression()
+        {
+            _customers = new List<Customer>
+            {
+                new Customer(Guid.NewGuid(), "Billy", 5),
+                new Customer(Guid.NewGuid(), "Billy", 25),
+            };
+
+            var query = new CustomerTestQuery()
+                .Or(new CustomerTestQuery().AndAgeIsOverSix());
+
+            var result = _customers
+                .NPredicateBuilderWhere(query)
+                .ToList();
+
+            Assert.AreEqual(1, result.Count);
         }
     }
 }
