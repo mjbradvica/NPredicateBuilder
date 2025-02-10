@@ -40,8 +40,7 @@ NPredicateBuilder is a way to build LINQ queries and orders with the following:
 ## Dependencies
 
 - Base Library - None
-- EF Library - NET480 - [LinqKit.EntityFramework](https://www.nuget.org/packages/LinqKit.EntityFramework)
-- EF Library - NET3.1/5/6/7/8 - [LinqKit.Microsoft.EntityFrameworkCore](https://www.nuget.org/packages/LinqKit.Microsoft.EntityFrameworkCore)
+- EF Library - [LinqKit.Microsoft.EntityFrameworkCore](https://www.nuget.org/packages/LinqKit.Microsoft.EntityFrameworkCore)
 
 NPredicateBuilder uses LinqKit to expand queries into a properly formed IQueryable.
 
