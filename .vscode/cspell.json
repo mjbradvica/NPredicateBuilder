@@ -6,6 +6,8 @@
     "LINQ",
     "netcoreapp",
     "netstandard",
-    "nupkg"
-  ]
+    "nupkg",
+    "stylecop"
+  ],
+  "ignorePaths": ["**/*.csproj"]
 }

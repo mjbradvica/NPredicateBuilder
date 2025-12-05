@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
+    <TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
     <Authors>Michael Bradvica</Authors>
     <Version>5.4.1</Version>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
@@ -13,7 +13,7 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Title>NPredicateBuilder.EF</Title>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <Copyright>Copyright (c) Simplex Software LLC 2025. All rights reserved.</Copyright>
+    <Copyright>Copyright (c) Simplex Software LLC 2026. All rights reserved.</Copyright>
     <PackageIcon>logo.png</PackageIcon>
     <PackageTags>linq, csharp,</PackageTags>
   </PropertyGroup>
@@ -30,7 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="LinqKit.Microsoft.EntityFrameworkCore" Version="9.0.8" />
+    <PackageReference Include="LinqKit.Microsoft.EntityFrameworkCore" Version="9.0.9" />
     <PackageReference Include="NPredicateBuilder" Version="5.4.1" />
   </ItemGroup>
 </Project>
