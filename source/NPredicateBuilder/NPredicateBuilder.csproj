@@ -1,24 +1,28 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Authors>Michael Bradvica</Authors>
-    <Description>NPredicateBuilder core library and extensions for LINQ to Objects.</Description>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <Version>5.5.0</Version>
-    <Company>Simplex Software LLC</Company>
-    <PackageProjectUrl>https://github.com/mjbradvica/NPredicateBuilder</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/mjbradvica/n-predicate-builder</RepositoryUrl>
-    <RepositoryType>Library</RepositoryType>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Title>NPredicateBuilder</Title>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <Authors>Michael Bradvica</Authors>
+    <Company>Simplex Software LLC</Company>
+    <Description>NPredicateBuilder core library and extensions for LINQ to Objects.</Description>
     <Copyright>Copyright (c) Simplex Software LLC 2026. All rights reserved.</Copyright>
+    <PackageProjectUrl>https://github.com/mjbradvica/NPredicateBuilder</PackageProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/mjbradvica/NPredicateBuilder</RepositoryUrl>
+    <PackageTags>linq, csharp, predicate-builder</PackageTags>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageIcon>logo.png</PackageIcon>
-    <PackageTags>linq, csharp,</PackageTags>
+    <Version>5.5.1</Version>
+    <RepositoryType>Library</RepositoryType>
   </PropertyGroup>
 
   <ItemGroup>
     <None Include="..\..\images\logo.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\..\LICENSE">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
