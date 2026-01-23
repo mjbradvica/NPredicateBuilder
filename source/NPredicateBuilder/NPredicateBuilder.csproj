@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
     <Authors>Michael Bradvica</Authors>
     <Description>NPredicateBuilder core library and extensions for LINQ to Objects.</Description>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>

@@ -2,7 +2,6 @@
 // Copyright (c) Simplex Software LLC. All rights reserved.
 // </copyright>
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NPredicateBuilder.EF;
 
 namespace NPredicateBuilder.Tests
@@ -17,11 +16,11 @@ namespace NPredicateBuilder.Tests
         /// Ensures method throws exception on null expression.
         /// </summary>
         [TestMethod]
-        public void NPredicateBuilderWhere_NullExpression_ThrowsException()
+        public void NPredicateBuilderWhereNullExpressionThrowsException()
         {
             var query = new CustomerTestQuery();
 
-            Assert.ThrowsException<ArgumentNullException>(() => new List<Customer>()
+            Assert.ThrowsExactly<ArgumentNullException>(() => new List<Customer>()
                 .NPredicateBuilderWhere(query));
         }
 
@@ -29,11 +28,11 @@ namespace NPredicateBuilder.Tests
         /// Ensures method throws exception on null expression.
         /// </summary>
         [TestMethod]
-        public void NPredicateBuilderOrder_NullExpression_ThrowsException()
+        public void NPredicateBuilderOrderNullExpressionThrowsException()
         {
             var order = new CustomerTestOrder();
 
-            Assert.ThrowsException<ArgumentNullException>(() => new List<Customer>()
+            Assert.ThrowsExactly<ArgumentNullException>(() => new List<Customer>()
                 .NPredicateBuilderOrder(order));
         }
 
@@ -41,11 +40,11 @@ namespace NPredicateBuilder.Tests
         /// Ensures method throws exception on null expression.
         /// </summary>
         [TestMethod]
-        public void NPredicateBuilderEFWhere_NullExpression_ThrowsException()
+        public void NPredicateBuilderEFWhereNullExpressionThrowsException()
         {
             var query = new CustomerTestQuery();
 
-            Assert.ThrowsException<ArgumentNullException>(() => new List<Customer>()
+            Assert.ThrowsExactly<ArgumentNullException>(() => new List<Customer>()
                 .AsQueryable()
                 .NPredicateBuilderEFWhere(query));
         }
@@ -54,11 +53,11 @@ namespace NPredicateBuilder.Tests
         /// Ensures method throws exception on null expression.
         /// </summary>
         [TestMethod]
-        public void NPredicateBuilderEFOrder_NullExpression_ThrowsException()
+        public void NPredicateBuilderEFOrderNullExpressionThrowsException()
         {
             var order = new CustomerTestOrder();
 
-            Assert.ThrowsException<ArgumentNullException>(() => new List<Customer>()
+            Assert.ThrowsExactly<ArgumentNullException>(() => new List<Customer>()
                 .AsQueryable()
                 .NPredicateBuilderEFOrder(order));
         }

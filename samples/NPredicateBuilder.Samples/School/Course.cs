@@ -7,7 +7,7 @@ namespace NPredicateBuilder.Samples.School
     /// <summary>
     /// Sample class for a school course.
     /// </summary>
-    internal class Course
+    internal sealed class Course
     {
         /// <summary>
         /// Gets or sets the course identifier.

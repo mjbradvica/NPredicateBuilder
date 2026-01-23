@@ -2,7 +2,6 @@
 // Copyright (c) Simplex Software LLC. All rights reserved.
 // </copyright>
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NPredicateBuilder.EF;
 
 namespace NPredicateBuilder.Tests
@@ -27,7 +26,7 @@ namespace NPredicateBuilder.Tests
         /// Ensures where filters for IEnumerable are correct.
         /// </summary>
         [TestMethod]
-        public void Where_IEnumerable_FiltersCorrectly()
+        public void WhereIEnumerableFiltersCorrectly()
         {
             _customers = new List<Customer>
             {
@@ -46,7 +45,7 @@ namespace NPredicateBuilder.Tests
         /// Ensure where filters for IQueryable are correct.
         /// </summary>
         [TestMethod]
-        public void Where_Queryable_FiltersCorrectly()
+        public void WhereQueryableFiltersCorrectly()
         {
             _customers = new List<Customer>
             {
@@ -65,7 +64,7 @@ namespace NPredicateBuilder.Tests
         /// Ensure filters for IEnumerable are correct.
         /// </summary>
         [TestMethod]
-        public void MultipleAndFilters_IEnumerable_FiltersCorrectly()
+        public void MultipleAndFiltersIEnumerableFiltersCorrectly()
         {
             var correctCustomer = new Customer(Guid.NewGuid(), "Billy", 10);
 
@@ -89,7 +88,7 @@ namespace NPredicateBuilder.Tests
         /// Ensures compound filter for IQueryable are correct.
         /// </summary>
         [TestMethod]
-        public void MultipleAndFilters_IQueryable_FiltersCorrectly()
+        public void MultipleAndFiltersIQueryableFiltersCorrectly()
         {
             var correctCustomer = new Customer(Guid.NewGuid(), "Billy", 10);
 
@@ -113,7 +112,7 @@ namespace NPredicateBuilder.Tests
         /// Ensures compound filters for IEnumerable are correct.
         /// </summary>
         [TestMethod]
-        public void CombinedAndOrFilters_IEnumerable_FiltersCorrectly()
+        public void CombinedAndOrFiltersIEnumerableFiltersCorrectly()
         {
             _customers = new List<Customer>
             {
@@ -130,14 +129,14 @@ namespace NPredicateBuilder.Tests
                 .NPredicateBuilderWhere(query)
                 .ToList();
 
-            Assert.AreEqual(3, result.Count);
+            Assert.HasCount(3, result);
         }
 
         /// <summary>
         /// Ensure compound filters for IQueryable are correct.
         /// </summary>
         [TestMethod]
-        public void CombinedAndOrFilters_IQueryable_FiltersCorrectly()
+        public void CombinedAndOrFiltersIQueryableFiltersCorrectly()
         {
             _customers = new List<Customer>
             {
@@ -154,14 +153,14 @@ namespace NPredicateBuilder.Tests
                 .NPredicateBuilderEFWhere(query)
                 .ToList();
 
-            Assert.AreEqual(3, result.Count);
+            Assert.HasCount(3, result);
         }
 
         /// <summary>
         /// Ensures filters for IEnumerable are correct.
         /// </summary>
         [TestMethod]
-        public void AppendedFilters_IEnumerable_FiltersCorrectly()
+        public void AppendedFiltersIEnumerableFiltersCorrectly()
         {
             _customers = new List<Customer>
             {
@@ -179,14 +178,14 @@ namespace NPredicateBuilder.Tests
                 .NPredicateBuilderWhere(query)
                 .ToList();
 
-            Assert.AreEqual(3, result.Count);
+            Assert.HasCount(3, result);
         }
 
         /// <summary>
         /// Ensures filters for IQueryable are correct.
         /// </summary>
         [TestMethod]
-        public void AppendedFilters_IQueryable_FiltersCorrectly()
+        public void AppendedFiltersIQueryableFiltersCorrectly()
         {
             _customers = new List<Customer>
             {
@@ -204,14 +203,14 @@ namespace NPredicateBuilder.Tests
                 .NPredicateBuilderEFWhere(query)
                 .ToList();
 
-            Assert.AreEqual(3, result.Count);
+            Assert.HasCount(3, result);
         }
 
         /// <summary>
         /// Ensures compound And filters are correct.
         /// </summary>
         [TestMethod]
-        public void CompoundQuery_IEnumerable_FiltersCorrectly()
+        public void CompoundQueryIEnumerableFiltersCorrectly()
         {
             _customers = new List<Customer>
             {
@@ -229,14 +228,14 @@ namespace NPredicateBuilder.Tests
                 .NPredicateBuilderWhere(query)
                 .ToList();
 
-            Assert.AreEqual(1, result.Count);
+            Assert.HasCount(1, result);
         }
 
         /// <summary>
         /// Ensures a new query on null expression is added.
         /// </summary>
         [TestMethod]
-        public void OrCriteriaFirst_NullExpression_AddsNewExpression()
+        public void OrCriteriaFirstNullExpressionAddsNewExpression()
         {
             _customers = new List<Customer>
             {
@@ -253,14 +252,14 @@ namespace NPredicateBuilder.Tests
                 .NPredicateBuilderWhere(query)
                 .ToList();
 
-            Assert.AreEqual(2, result.Count);
+            Assert.HasCount(2, result);
         }
 
         /// <summary>
         /// Compound AND query with invalid current only uses next.
         /// </summary>
         [TestMethod]
-        public void And_NullExpression_ValidNewExpression_UsesNewExpression()
+        public void AndNullExpressionValidNewExpressionUsesNewExpression()
         {
             _customers = new List<Customer>
             {
@@ -275,14 +274,14 @@ namespace NPredicateBuilder.Tests
                 .NPredicateBuilderWhere(query)
                 .ToList();
 
-            Assert.AreEqual(1, result.Count);
+            Assert.HasCount(1, result);
         }
 
         /// <summary>
         /// Compound OR query with invalid current only uses next expression.
         /// </summary>
         [TestMethod]
-        public void Or_NullExpression_ValidNewExpression_UsesNewExpression()
+        public void OrNullExpressionValidNewExpressionUsesNewExpression()
         {
             _customers = new List<Customer>
             {
@@ -297,7 +296,7 @@ namespace NPredicateBuilder.Tests
                 .NPredicateBuilderWhere(query)
                 .ToList();
 
-            Assert.AreEqual(1, result.Count);
+            Assert.HasCount(1, result);
         }
     }
 }

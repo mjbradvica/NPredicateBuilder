@@ -3,7 +3,6 @@
 // </copyright>
 
 using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NPredicateBuilder.EF;
 
 namespace NPredicateBuilder.Tests
@@ -19,7 +18,7 @@ namespace NPredicateBuilder.Tests
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous unit test.</returns>
         [TestMethod]
-        public async Task Where_DbSet_FiltersCorrectly()
+        public async Task WhereDbSetFiltersCorrectly()
         {
             var customers = new List<Customer>
             {
@@ -29,8 +28,8 @@ namespace NPredicateBuilder.Tests
 
             await using (var context = new TestContext(ContextOptions))
             {
-                await context.Customers.AddRangeAsync(customers);
-                await context.SaveChangesAsync();
+                await context.Customers.AddRangeAsync(customers, CancellationToken.None);
+                await context.SaveChangesAsync(CancellationToken.None);
             }
 
             List<Customer> results;
@@ -42,7 +41,7 @@ namespace NPredicateBuilder.Tests
 
                 results = await context.Customers
                     .NPredicateBuilderEFWhere(query)
-                    .ToListAsync();
+                    .ToListAsync(CancellationToken.None);
             }
 
             Assert.AreEqual("Bobby", results.Single().Name);
@@ -53,7 +52,7 @@ namespace NPredicateBuilder.Tests
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous unit test.</returns>
         [TestMethod]
-        public async Task MultipleAndFilters_FiltersCorrectly()
+        public async Task MultipleAndFiltersFiltersCorrectly()
         {
             var correctCustomer = new Customer(Guid.NewGuid(), "Billy", 10);
 
@@ -64,8 +63,8 @@ namespace NPredicateBuilder.Tests
 
             await using (var context = new TestContext(ContextOptions))
             {
-                await context.Customers.AddRangeAsync(customers);
-                await context.SaveChangesAsync();
+                await context.Customers.AddRangeAsync(customers, CancellationToken.None);
+                await context.SaveChangesAsync(CancellationToken.None);
             }
 
             List<Customer> results;
@@ -77,7 +76,7 @@ namespace NPredicateBuilder.Tests
 
                 results = await context.Customers
                     .NPredicateBuilderEFWhere(query)
-                    .ToListAsync();
+                    .ToListAsync(CancellationToken.None);
             }
 
             Assert.AreEqual(correctCustomer.Name, results.Single().Name);
@@ -89,7 +88,7 @@ namespace NPredicateBuilder.Tests
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous unit test.</returns>
         [TestMethod]
-        public async Task CombinedAndOrFilters_FiltersCorrectly()
+        public async Task CombinedAndOrFiltersFiltersCorrectly()
         {
             var customers = new List<Customer>
             {
@@ -101,8 +100,8 @@ namespace NPredicateBuilder.Tests
 
             await using (var context = new TestContext(ContextOptions))
             {
-                await context.Customers.AddRangeAsync(customers);
-                await context.SaveChangesAsync();
+                await context.Customers.AddRangeAsync(customers, CancellationToken.None);
+                await context.SaveChangesAsync(CancellationToken.None);
             }
 
             List<Customer> results;
@@ -114,10 +113,10 @@ namespace NPredicateBuilder.Tests
 
                 results = await context.Customers
                     .NPredicateBuilderEFWhere(query)
-                    .ToListAsync();
+                    .ToListAsync(CancellationToken.None);
             }
 
-            Assert.AreEqual(3, results.Count);
+            Assert.HasCount(3, results);
         }
 
         /// <summary>
@@ -125,7 +124,7 @@ namespace NPredicateBuilder.Tests
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous unit test.</returns>
         [TestMethod]
-        public async Task AppendedFilters_FiltersCorrectly()
+        public async Task AppendedFiltersFiltersCorrectly()
         {
             var customers = new List<Customer>
             {
@@ -137,8 +136,8 @@ namespace NPredicateBuilder.Tests
 
             await using (var context = new TestContext(ContextOptions))
             {
-                await context.Customers.AddRangeAsync(customers);
-                await context.SaveChangesAsync();
+                await context.Customers.AddRangeAsync(customers, CancellationToken.None);
+                await context.SaveChangesAsync(CancellationToken.None);
             }
 
             List<Customer> results;
@@ -151,10 +150,10 @@ namespace NPredicateBuilder.Tests
 
                 results = await context.Customers
                     .NPredicateBuilderEFWhere(query)
-                    .ToListAsync();
+                    .ToListAsync(CancellationToken.None);
             }
 
-            Assert.AreEqual(3, results.Count);
+            Assert.HasCount(3, results);
         }
     }
 }
