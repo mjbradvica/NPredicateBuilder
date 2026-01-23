@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 namespace NPredicateBuilder
 {
     /// <inheritdoc />
-    internal class ThenByDescending<TEntity, TKey> : IThenByOrder<TEntity>
+    internal sealed class ThenByDescending<TEntity, TKey> : IThenByOrder<TEntity>
     {
         private readonly Expression<Func<TEntity, TKey>> _orderExpression;
 
