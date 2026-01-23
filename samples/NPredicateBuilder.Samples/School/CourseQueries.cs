@@ -7,7 +7,7 @@ namespace NPredicateBuilder.Samples.School
     /// <summary>
     /// Sample query object for the <see cref="Course"/> class.
     /// </summary>
-    internal class CourseQueries : BaseQuery<Course>
+    internal sealed class CourseQueries : BaseQuery<Course>
     {
         /// <summary>
         /// Checks to see if a course has a requirement that must be taken before.

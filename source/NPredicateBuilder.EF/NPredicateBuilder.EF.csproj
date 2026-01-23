@@ -1,25 +1,28 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
-    <Authors>Michael Bradvica</Authors>
-    <Version>5.5.0</Version>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <Company>Simplex Software LLC</Company>
-    <Description>NPredicateBuilder extensions for Entity Framework.</Description>
-    <PackageProjectUrl>https://github.com/mjbradvica/NPredicateBuilder</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/mjbradvica/n-predicate-builder</RepositoryUrl>
-    <RepositoryType>Library</RepositoryType>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Title>NPredicateBuilder.EF</Title>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <Authors>Michael Bradvica</Authors>
+    <Company>Simplex Software LLC</Company>
+    <Description>NPredicateBuilder extensions for Entity Framework for LINQ to Entities.</Description>
     <Copyright>Copyright (c) Simplex Software LLC 2026. All rights reserved.</Copyright>
+    <PackageProjectUrl>https://github.com/mjbradvica/NPredicateBuilder</PackageProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/mjbradvica/NPredicateBuilder</RepositoryUrl>
+    <PackageTags>linq, csharp, predicate-builder</PackageTags>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageIcon>logo.png</PackageIcon>
-    <PackageTags>linq, csharp,</PackageTags>
+    <Version>5.5.0</Version>
+    <RepositoryType>Library</RepositoryType>
   </PropertyGroup>
 
   <ItemGroup>
     <None Include="..\..\images\logo.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\..\LICENSE">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
@@ -29,8 +32,15 @@
     </None>
   </ItemGroup>
 
-  <ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' != 'net10.0'">
     <PackageReference Include="LinqKit.Microsoft.EntityFrameworkCore" Version="9.0.9" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net10.0'">
+    <PackageReference Include="LinqKit.Microsoft.EntityFrameworkCore" Version="10.0.9" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="NPredicateBuilder" Version="5.5.0" />
   </ItemGroup>
 </Project>

@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+  </Folder>
+  <Project Path="samples/NPredicateBuilder.Samples/NPredicateBuilder.Samples.csproj" />
+  <Project Path="source/NPredicateBuilder.EF/NPredicateBuilder.EF.csproj" />
+  <Project Path="source/NPredicateBuilder/NPredicateBuilder.csproj" />
+  <Project Path="tests/NPredicateBuilder.Tests/NPredicateBuilder.Tests.csproj" />
+</Solution>

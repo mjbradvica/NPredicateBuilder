@@ -3,7 +3,6 @@
 // </copyright>
 
 using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NPredicateBuilder.EF;
 
 namespace NPredicateBuilder.Tests
@@ -19,7 +18,7 @@ namespace NPredicateBuilder.Tests
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous unit test.</returns>
         [TestMethod]
-        public async Task OrderBy_OrdersCorrectlyAsync()
+        public async Task OrderByOrdersCorrectlyAsync()
         {
             var customers = new List<Customer>
             {
@@ -30,8 +29,8 @@ namespace NPredicateBuilder.Tests
 
             await using (var context = new TestContext(ContextOptions))
             {
-                await context.Customers.AddRangeAsync(customers);
-                await context.SaveChangesAsync();
+                await context.Customers.AddRangeAsync(customers, CancellationToken.None);
+                await context.SaveChangesAsync(CancellationToken.None);
             }
 
             List<Customer> results;
@@ -42,7 +41,7 @@ namespace NPredicateBuilder.Tests
 
                 results = await context.Customers
                     .NPredicateBuilderEFOrder(order)
-                    .ToListAsync();
+                    .ToListAsync(CancellationToken.None);
             }
 
             Assert.AreEqual("Billy", results.First().Name);
@@ -53,7 +52,7 @@ namespace NPredicateBuilder.Tests
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous unit test.</returns>
         [TestMethod]
-        public async Task ThenBy_OrdersCorrectlyAsync()
+        public async Task ThenByOrdersCorrectlyAsync()
         {
             var customers = new List<Customer>
             {
@@ -64,8 +63,8 @@ namespace NPredicateBuilder.Tests
 
             await using (var context = new TestContext(ContextOptions))
             {
-                await context.Customers.AddRangeAsync(customers);
-                await context.SaveChangesAsync();
+                await context.Customers.AddRangeAsync(customers, CancellationToken.None);
+                await context.SaveChangesAsync(CancellationToken.None);
             }
 
             List<Customer> results;
@@ -78,7 +77,7 @@ namespace NPredicateBuilder.Tests
 
                 results = await context.Customers
                     .NPredicateBuilderEFOrder(order)
-                    .ToListAsync();
+                    .ToListAsync(CancellationToken.None);
             }
 
             Assert.AreEqual("Billy", results.First().Name);
@@ -90,7 +89,7 @@ namespace NPredicateBuilder.Tests
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous unit test.</returns>
         [TestMethod]
-        public async Task OrderByDescending_OrdersCorrectlyAsync()
+        public async Task OrderByDescendingOrdersCorrectlyAsync()
         {
             var customers = new List<Customer>
             {
@@ -101,8 +100,8 @@ namespace NPredicateBuilder.Tests
 
             await using (var context = new TestContext(ContextOptions))
             {
-                await context.Customers.AddRangeAsync(customers);
-                await context.SaveChangesAsync();
+                await context.Customers.AddRangeAsync(customers, CancellationToken.None);
+                await context.SaveChangesAsync(CancellationToken.None);
             }
 
             List<Customer> results;
@@ -114,7 +113,7 @@ namespace NPredicateBuilder.Tests
 
                 results = await context.Customers
                     .NPredicateBuilderEFOrder(order)
-                    .ToListAsync();
+                    .ToListAsync(CancellationToken.None);
             }
 
             Assert.AreEqual("Billy", results.Last().Name);
@@ -125,7 +124,7 @@ namespace NPredicateBuilder.Tests
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous unit test.</returns>
         [TestMethod]
-        public async Task ThenByDescending_OrdersCorrectly()
+        public async Task ThenByDescendingOrdersCorrectly()
         {
             var customers = new List<Customer>
             {
@@ -136,8 +135,8 @@ namespace NPredicateBuilder.Tests
 
             await using (var context = new TestContext(ContextOptions))
             {
-                await context.Customers.AddRangeAsync(customers);
-                await context.SaveChangesAsync();
+                await context.Customers.AddRangeAsync(customers, CancellationToken.None);
+                await context.SaveChangesAsync(CancellationToken.None);
             }
 
             List<Customer> results;
@@ -150,7 +149,7 @@ namespace NPredicateBuilder.Tests
 
                 results = await context.Customers
                     .NPredicateBuilderEFOrder(order)
-                    .ToListAsync();
+                    .ToListAsync(CancellationToken.None);
             }
 
             Assert.AreEqual("Billy", results.First().Name);

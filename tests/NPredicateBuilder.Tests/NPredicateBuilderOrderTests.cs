@@ -2,7 +2,6 @@
 // Copyright (c) Simplex Software LLC. All rights reserved.
 // </copyright>
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NPredicateBuilder.EF;
 
 namespace NPredicateBuilder.Tests
@@ -19,7 +18,7 @@ namespace NPredicateBuilder.Tests
         /// Ensures ordering for IEnumerable are correct.
         /// </summary>
         [TestMethod]
-        public void OrderBy_IEnumerable_OrdersCorrectly()
+        public void OrderByIEnumerableOrdersCorrectly()
         {
             _customers = new List<Customer>
             {
@@ -39,7 +38,7 @@ namespace NPredicateBuilder.Tests
         /// Ensures orders for IQueryable are correct.
         /// </summary>
         [TestMethod]
-        public void OrderBy_IQueryable_OrdersCorrectly()
+        public void OrderByIQueryableOrdersCorrectly()
         {
             _customers = new List<Customer>
             {
@@ -59,7 +58,7 @@ namespace NPredicateBuilder.Tests
         /// Ensures multiple orders for IEnumerable are correct.
         /// </summary>
         [TestMethod]
-        public void ThenBy_IEnumerable_OrdersCorrectly()
+        public void ThenByIEnumerableOrdersCorrectly()
         {
             _customers = new List<Customer>
             {
@@ -72,7 +71,7 @@ namespace NPredicateBuilder.Tests
                 .ByName()
                 .ThenByAge();
 
-            var result = _customers.NPredicateBuilderOrder(order);
+            var result = _customers.NPredicateBuilderOrder(order).ToList();
 
             Assert.AreEqual("Billy", result.First().Name);
             Assert.AreEqual(20, result.First().Age);
@@ -82,7 +81,7 @@ namespace NPredicateBuilder.Tests
         /// Ensures multiple orders for IQueryable are correct.
         /// </summary>
         [TestMethod]
-        public void ThenBy_IQueryable_OrdersCorrectly()
+        public void ThenByIQueryableOrdersCorrectly()
         {
             _customers = new List<Customer>
             {
@@ -105,7 +104,7 @@ namespace NPredicateBuilder.Tests
         /// Ensures multiple orders for IEnumerable are correct.
         /// </summary>
         [TestMethod]
-        public void OrderByDescending_IEnumerable_OrdersCorrectly()
+        public void OrderByDescendingIEnumerableOrdersCorrectly()
         {
             _customers = new List<Customer>
             {
@@ -125,7 +124,7 @@ namespace NPredicateBuilder.Tests
         /// Ensures multiple orders for IQueryable are correct.
         /// </summary>
         [TestMethod]
-        public void OrderByDescending_IQueryable_OrdersCorrectly()
+        public void OrderByDescendingIQueryableOrdersCorrectly()
         {
             _customers = new List<Customer>
             {
@@ -145,7 +144,7 @@ namespace NPredicateBuilder.Tests
         /// Ensures multiple orders for IEnumerable are correct.
         /// </summary>
         [TestMethod]
-        public void ThenByDescending_IEnumerable_OrdersCorrectly()
+        public void ThenByDescendingIEnumerableOrdersCorrectly()
         {
             _customers = new List<Customer>
             {
@@ -158,7 +157,7 @@ namespace NPredicateBuilder.Tests
                 .ByName()
                 .ThenByAgeDescending();
 
-            var result = _customers.NPredicateBuilderOrder(order);
+            var result = _customers.NPredicateBuilderOrder(order).ToList();
 
             Assert.AreEqual("Billy", result.First().Name);
             Assert.AreEqual(30, result.First().Age);
@@ -168,7 +167,7 @@ namespace NPredicateBuilder.Tests
         /// Ensures multiple orders for IQueryable are correct.
         /// </summary>
         [TestMethod]
-        public void ThenByDescending_IQueryable_OrdersCorrectly()
+        public void ThenByDescendingIQueryableOrdersCorrectly()
         {
             _customers = new List<Customer>
             {

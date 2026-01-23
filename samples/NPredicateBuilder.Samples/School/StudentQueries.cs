@@ -7,7 +7,7 @@ namespace NPredicateBuilder.Samples.School
     /// <summary>
     /// Sample class for <see cref="Student"/> queries.
     /// </summary>
-    internal class StudentQueries : BaseQuery<Student>
+    internal sealed class StudentQueries : BaseQuery<Student>
     {
         /// <summary>
         /// Returns all courses for a student that match a department.
