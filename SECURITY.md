@@ -6,9 +6,9 @@ The current versions are supported; NPredicateBuilder follows Microsoft's policy
 
 | Version | Dotnet | Supported          |
 | ------- | ------ | ------------------ |
-| 0.9.7   | 8/9/10 | :white_check_mark: |
-| 0.9.6   | 7/8/9  | :x:                |
-| < 0.9.5 | < 7    | :x:                |
+| 5.5.x   | 8/9/10 | :white_check_mark: |
+| 5.4.x   | 7/8/9  | :x:                |
+| < 5.3.x | < 7    | :x:                |
 
 ## Reporting a Vulnerability
 
