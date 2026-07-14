@@ -1,13 +1,4 @@
 {
-  "words": [
-    "Bradvica",
-    "buildtransitive",
-    "contentfiles",
-    "LINQ",
-    "netcoreapp",
-    "netstandard",
-    "nupkg",
-    "stylecop"
-  ],
-  "ignorePaths": ["**/*.csproj"]
+  "words": ["Bradvica"],
+  "files": ["../.gitattributes"]
 }
